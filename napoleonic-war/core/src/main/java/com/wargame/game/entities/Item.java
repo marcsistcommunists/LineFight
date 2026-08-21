@@ -3,7 +3,7 @@ package com.wargame.game.entities;
 /**
  * Типы предметов экипировки
  */
-public enum ItemType {
+enum ItemType {
     WEAPON,     // Оружие (мушкет, штык)
     BANNER,     // Знамя
     ACCESSORY   // Бонусные предметы (орден, барабанщик)

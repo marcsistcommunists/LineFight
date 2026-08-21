@@ -5,7 +5,7 @@ import com.wargame.game.entities.Regiment;
 /**
  * Типы действий в бою
  */
-public enum ActionType {
+enum ActionType {
     MOVE,   // Перемещение
     ATTACK, // Атака
     WAIT    // Ожидание (конец хода)
