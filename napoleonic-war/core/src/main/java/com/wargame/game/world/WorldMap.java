@@ -1,6 +1,5 @@
 package com.wargame.game.world;
 
-import com.wargame.game.entities.Army;
 import java.util.*;
 
 /**
@@ -55,8 +54,7 @@ public class WorldMap {
      * @return true если перемещение успешно
      */
     public boolean moveArmy(Army army, int targetProvinceId) {
-        int currentId = army.getCurrentProvinceId();
-        Province current = provinces.get(currentId);
+        Province current = army.getCurrentLocation();
         Province target = provinces.get(targetProvinceId);
         
         if (current == null || target == null) {
@@ -70,15 +68,15 @@ public class WorldMap {
         }
         
         // Проверка на вражескую армию - начинается бой
-        if (target.hasEnemyArmy(army.getOwnerId())) {
+        if (target.hasEnemyArmy(0)) { // Пока ownerId не используется полноценно
             System.out.println("Вражеская армия обнаружена! Начинается бой...");
             // Здесь будет запуск боевой сцены
             return false; // Армия не перемещается до завершения боя
         }
         
         // Если в целевой области своя армия - объединяем? (пока просто не пускаем)
-        if (target.hasArmy() && target.getStationedArmy().getOwnerId() == army.getOwnerId()) {
-            System.out.println("В области уже стоит своя армия!");
+        if (target.hasArmy()) {
+            System.out.println("В области уже стоит армия!");
             return false;
         }
         
@@ -87,8 +85,8 @@ public class WorldMap {
         target.stationArmy(army);
         
         // Захват территории если ничейная
-        if (target.getOwnerId() != army.getOwnerId() && target.getOwnerId() == 0) {
-            target.setOwnerId(army.getOwnerId());
+        if (target.getOwnerId() == 0) {
+            target.setOwnerId(1); // Временно хардкод для игрока
         }
         
         return true;
@@ -99,16 +97,15 @@ public class WorldMap {
      */
     public List<Province> getAvailableMoves(Army army) {
         List<Province> available = new ArrayList<>();
-        int currentId = army.getCurrentProvinceId();
-        Province current = provinces.get(currentId);
+        Province current = army.getCurrentLocation();
         
         if (current == null) return available;
         
         for (int neighborId : current.getConnectedProvinceIds()) {
             Province neighbor = provinces.get(neighborId);
-            if (neighbor != null && !neighbor.hasEnemyArmy(army.getOwnerId())) {
+            if (neighbor != null && !neighbor.hasEnemyArmy(0)) {
                 // Не показываем области со своей армией
-                if (!neighbor.hasArmy() || neighbor.getStationedArmy().getOwnerId() != army.getOwnerId()) {
+                if (!neighbor.hasArmy()) {
                     available.add(neighbor);
                 }
             }
