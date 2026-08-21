@@ -5,7 +5,10 @@ plugins {
 
 group = 'com.wargame'
 version = '0.1-SNAPSHOT'
-sourceCompatibility = '17'
+
+java {
+    sourceCompatibility = '17'
+}
 
 repositories {
     mavenCentral()
