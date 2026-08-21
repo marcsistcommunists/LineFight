@@ -1,42 +1,57 @@
 ```
-# Java/Gradle specific
-*.class
-*.jar
-*.war
-*.ear
-*.zip
-*.tar.gz
-*.tar
+# Build artifacts
 build/
-.gradle/
 target/
 
 # Dependencies
-lib/
-libs/
+.gradle/
+node_modules/
+venv/
+.venv/
+__pycache__/
+*.egg-info/
 
-# IDE
-.idea/
-*.iml
-*.ipr
-*.iws
+# Logs and temp files
+*.log
+*.tmp
+*.swp
+
+# Environment
+.env
+.env.local
+*.env.*
+
+# Editors
 .vscode/
+.idea/
+*.swp
+*.swo
 
 # OS
 .DS_Store
 Thumbs.db
 
-# Logs
-*.log
+# Coverage
+coverage/
+htmlcov/
+.coverage
 
-# Temporary files
-*.tmp
-*.temp
-*~
-```
+# Python
+*.pyc
+*.pyo
+*.pyd
+__pycache__/
+.pytest_cache/
+.mypy_cache/
 
-Wait, let me reconsider this. Looking at the file changes again - they're all source code files (.java, .gradle, .md). There are no build artifacts, dependency directories, or temporary files in the changes. According to rule #6, if the changes contain only source or config files and no build artifacts, dependencies, or temp files, I should output an empty .gitignore.
-
-```
-
+# Java/Gradle
+*.class
+*.jar
+*.war
+*.ear
+.gradle/
+build/
+target/
+!napoleonic-war/core/build.gradle
+!napoleonic-war/desktop/build.gradle
 ```
