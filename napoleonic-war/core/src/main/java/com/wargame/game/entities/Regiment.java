@@ -109,6 +109,10 @@ public class Regiment {
         return !isDestroyed && currentHealth > 0;
     }
     
+    public boolean isActive() {
+        return isAlive();
+    }
+    
     public void equipItem(Item item) {
         inventory.equipItem(item);
         recalculateStats();

@@ -7,7 +7,7 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.wargame.game.NapoleonicWarGame;
-import com.wargame.game.entities.Army;
+import com.wargame.game.world.Army;
 import com.wargame.game.entities.Regiment;
 import com.wargame.game.world.Province;
 import com.wargame.game.world.WorldMap;
@@ -32,7 +32,7 @@ public class GlobalMapScreen implements com.badlogic.gdx.Screen {
         this.game = game;
         this.batch = new SpriteBatch();
         this.camera = new OrthographicCamera();
-        this.camera.setToOrtho(1280, 720);
+        this.camera.setToOrtho(false, 1280, 720);
         this.font = new BitmapFont();
         this.font.setColor(Color.BLACK);
         
@@ -57,7 +57,8 @@ public class GlobalMapScreen implements com.badlogic.gdx.Screen {
      * Создать тестовую армию игрока
      */
     private Army createPlayerArmy() {
-        Army army = new Army("Армия Наполеона", 1);
+        Army army = new Army();
+        army.setGeneralName("Наполеон");
         
         // Добавляем полки
         Regiment infantry1 = new Regiment("1-й Линейный полк", Regiment.RegimentType.LINE_INFANTRY);
@@ -70,7 +71,7 @@ public class GlobalMapScreen implements com.badlogic.gdx.Screen {
         army.addRegiment(lightInfantry);
         army.addRegiment(cavalry);
         
-        System.out.println("Создана армия: " + army.getLivingRegimentsCount() + " полков");
+        System.out.println("Создана армия: " + army.getRegimentCount() + " полков");
         return army;
     }
     
@@ -169,16 +170,18 @@ public class GlobalMapScreen implements com.badlogic.gdx.Screen {
         
         if (selectedProvince.hasArmy()) {
             Army army = selectedProvince.getStationedArmy();
-            font.draw(batch, "Армия: " + army.getName(), panelX, panelY - 100);
-            font.draw(batch, "Полков: " + army.getLivingRegimentsCount(), panelX, panelY - 130);
+            font.draw(batch, "Генерал: " + army.getGeneralName(), panelX, panelY - 100);
+            font.draw(batch, "Полков: " + army.getRegimentCount(), panelX, panelY - 130);
             
             // Список полков
             int yOffset = 170;
-            for (Regiment regiment : army.getLivingRegiments()) {
-                font.draw(batch, "  - " + regiment.getName() + 
-                         " (HP: " + regiment.getCurrentHealth() + "/" + regiment.getMaxHealth() + ")", 
-                         panelX, panelY - yOffset);
-                yOffset += 30;
+            for (Regiment regiment : army.getRegiments()) {
+                if (regiment.isActive()) {
+                    font.draw(batch, "  - " + regiment.getName() + 
+                             " (HP: " + regiment.getCurrentHealth() + "/" + regiment.getMaxHealth() + ")", 
+                             panelX, panelY - yOffset);
+                    yOffset += 30;
+                }
             }
         }
     }

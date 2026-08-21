@@ -1,51 +1,34 @@
 ```
-# Java/Gradle specific ignores
+# Gradle
+.gradle/
+build/
+!gradle/wrapper/gradle-wrapper.properties
+
+# Java
 *.class
 *.jar
 *.war
 *.ear
+
+# IDE
+.idea/
 *.iml
 *.ipr
 *.iws
-*.gradle/
-.gradle/
-!gradle.properties
-!gradlew
-!gradlew.bat
-build/
-target/
-
-# IDE specific
-.idea/
-.vscode/
-*.swp
-*.swo
-
-# System files
-.DS_Store
-Thumbs.db
 
 # Logs
 *.log
 
-# Temporary files
-*.tmp
-*.temp
-
-# Dependencies and packages
-node_modules/
-__pycache__/
-*.pyc
-*.pyo
-*.pyd
-.pytest_cache/
-.mypy_cache/
-.coverage
-coverage/
-htmlcov/
-
-# Environment files
+# Environment
 .env
 .env.local
 *.env.*
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Temp files
+*.tmp
+*.temp
 ```

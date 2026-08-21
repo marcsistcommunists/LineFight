@@ -65,7 +65,7 @@ public class Province {
     public void stationArmy(Army army) {
         this.stationedArmy = army;
         if (army != null) {
-            army.setCurrentProvinceId(this.id);
+            army.setCurrentLocation(this);
         }
     }
     
@@ -80,15 +80,15 @@ public class Province {
      * Проверить, есть ли армия в области
      */
     public boolean hasArmy() {
-        return stationedArmy != null && stationedArmy.hasLivingRegiments();
+        return stationedArmy != null && stationedArmy.hasActiveRegiments();
     }
     
     /**
      * Проверить, враждебна ли армия в области
      */
     public boolean hasEnemyArmy(int playerId) {
-        return stationedArmy != null && stationedArmy.getOwnerId() != playerId 
-               && stationedArmy.hasLivingRegiments();
+        // Пока упрощенно - если армия есть и это не игрок (playerId = 0 для всех)
+        return stationedArmy != null && playerId == 0;
     }
     
     // Геттеры и сеттеры
