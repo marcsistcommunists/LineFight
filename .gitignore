@@ -1,57 +1,51 @@
 ```
-# Build artifacts
-build/
-target/
-
-# Dependencies
-.gradle/
-node_modules/
-venv/
-.venv/
-__pycache__/
-*.egg-info/
-
-# Logs and temp files
-*.log
-*.tmp
-*.swp
-
-# Environment
-.env
-.env.local
-*.env.*
-
-# Editors
-.vscode/
-.idea/
-*.swp
-*.swo
-
-# OS
-.DS_Store
-Thumbs.db
-
-# Coverage
-coverage/
-htmlcov/
-.coverage
-
-# Python
-*.pyc
-*.pyo
-*.pyd
-__pycache__/
-.pytest_cache/
-.mypy_cache/
-
-# Java/Gradle
+# Java/Gradle specific ignores
 *.class
 *.jar
 *.war
 *.ear
+*.iml
+*.ipr
+*.iws
+*.gradle/
 .gradle/
+!gradle.properties
+!gradlew
+!gradlew.bat
 build/
 target/
-!napoleonic-war/core/build.gradle
-!napoleonic-war/desktop/build.gradle
+
+# IDE specific
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# System files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Temporary files
+*.tmp
+*.temp
+
+# Dependencies and packages
+node_modules/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.pytest_cache/
+.mypy_cache/
+.coverage
+coverage/
+htmlcov/
+
+# Environment files
+.env
+.env.local
+*.env.*
 ```

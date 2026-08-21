@@ -32,7 +32,7 @@ public class GlobalMapScreen implements com.badlogic.gdx.Screen {
         this.game = game;
         this.batch = new SpriteBatch();
         this.camera = new OrthographicCamera();
-        this.camera.setToOrtho2D(0, 0, 1280, 720);
+        this.camera.setToOrtho(1280, 720);
         this.font = new BitmapFont();
         this.font.setColor(Color.BLACK);
         
