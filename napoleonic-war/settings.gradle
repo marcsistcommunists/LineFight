@@ -1,4 +1,0 @@
-rootProject.name = 'napoleonic-war'
-include 'core', 'desktop'
-
-ext.gdxVersion = '1.12.0'
